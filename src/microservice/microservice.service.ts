@@ -1,6 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import Stripe from 'stripe';
-import { PaymentsDto } from './payment.interface';
+import { PlansDTO } from "./plans.interface";
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const fs = require('fs-extra');
+const config = fs.readJsonSync('./src/config/config.json');
+
 @Injectable()
 export class MicroserviceService {
     private stripe: Stripe;
@@ -11,9 +15,10 @@ export class MicroserviceService {
         });
     }
 
-    async createPayment(paymentRequestBody: PaymentsDto): Promise<any> {
+    async createPayment(plan: PlansDTO): Promise<any> {
+        const id = await this.planProductChooser(plan);
         const session = await this.stripe.checkout.sessions.create({
-            line_items: [{ price: 'price_1NNM1AGPmYoMeq5bycGWPWgL', quantity: 1 }],
+            line_items: [{ price: id, quantity: 1 }],
             mode: 'subscription',
             customer: "cus_O9fNxrZisANyB9",
             success_url: 'http://localhost:3000/microservice/success',
@@ -21,8 +26,15 @@ export class MicroserviceService {
         });
         return session;
     }
-    async successPayment(session){
-        console.log(session);
-        return session;
+
+    async planProductChooser(plan: PlansDTO): Promise<string> {
+        switch (plan.name) {
+            case "Basic":
+                return config.stripe.product.Basic;
+            case "Pro":
+                return config.stripe.product.Pro;
+            case "AI":
+                return config.stripe.product.AI;
+        }
     }
 }

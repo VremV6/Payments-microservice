@@ -1,0 +1,9 @@
+{
+  "stripe": {
+    "product": {
+      "Basic": "price_1NNM1AGPmYoMeq5bycGWPWgL",
+      "Pro": "price_1NPs1GGPmYoMeq5bVf4lP5Cp",
+      "AI": "price_1NPs1PGPmYoMeq5bPWYHnA4k"
+    }
+  }
+}
