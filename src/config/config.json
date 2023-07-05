@@ -1,9 +1,11 @@
 {
   "stripe": {
+    "key": "sk_test_51NNLfnGPmYoMeq5bCEgM2XiSIukH5rAQLbEqagUm2bCpV8jh8Jd5H6thIzE799jCXx1VFLGcffHzzEcbN1GnDh0V005INw18RO",
     "product": {
       "Basic": "price_1NNM1AGPmYoMeq5bycGWPWgL",
       "Pro": "price_1NPs1GGPmYoMeq5bVf4lP5Cp",
       "AI": "price_1NPs1PGPmYoMeq5bPWYHnA4k"
-    }
+    },
+    "customer": "cus_O9fNxrZisANyB9"
   }
 }

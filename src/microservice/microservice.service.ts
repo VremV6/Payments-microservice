@@ -10,7 +10,7 @@ export class MicroserviceService {
     private stripe: Stripe;
 
     constructor() {
-        this.stripe = new Stripe("sk_test_51NNLfnGPmYoMeq5bCEgM2XiSIukH5rAQLbEqagUm2bCpV8jh8Jd5H6thIzE799jCXx1VFLGcffHzzEcbN1GnDh0V005INw18RO", {
+        this.stripe = new Stripe(config.stripe.key, {
             apiVersion: '2022-11-15',
         });
     }
@@ -20,7 +20,7 @@ export class MicroserviceService {
         const session = await this.stripe.checkout.sessions.create({
             line_items: [{ price: id, quantity: 1 }],
             mode: 'subscription',
-            customer: "cus_O9fNxrZisANyB9",
+            customer: config.stripe.customer,
             success_url: 'http://localhost:3000/microservice/success',
             cancel_url: 'http://localhost:3000/microservice/failure',
         });
