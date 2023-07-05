@@ -21,7 +21,7 @@ export class MicroserviceService {
             line_items: [{ price: id, quantity: 1 }],
             mode: 'subscription',
             customer: config.stripe.customer,
-            success_url: 'http://localhost:3000/microservice/success',
+            success_url: 'http://localhost:3000/',
             cancel_url: 'http://localhost:3000/microservice/failure',
         });
         return session;
